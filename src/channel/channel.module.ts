@@ -1,9 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ChannelService } from './channel.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Channel, ChannelSchema } from 'src/schemas/channel.model';
 import { ChannelController } from './channel.controller';
+import { ChannelService } from './channel.service';
 
 @Module({
-  providers: [ChannelService],
-  controllers: [ChannelController]
+  imports: [
+    MongooseModule.forFeature([{ name: Channel.name, schema: ChannelSchema }]),
+  ],
+  providers: [ChannelService, MongooseModule],
+  controllers: [ChannelController],
 })
-export class ChannelModule {}
+export class ChannelModule { }

@@ -1,4 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Expose } from 'class-transformer';
 import * as mongoose from "mongoose";
 
 export type ChannelDocument = mongoose.HydratedDocument<Channel>;
@@ -14,7 +15,7 @@ export class Channel {
   @Prop({ required: true })
   name: string;
 
-  @Prop({ required: true })
+  @Prop({ default: "" })
   description: string;
 
   @Prop({ required: true, type: [mongoose.Schema.Types.ObjectId], ref: 'User' })
